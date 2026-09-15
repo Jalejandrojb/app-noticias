@@ -6,7 +6,7 @@ function App() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const urlAPI = "https://jalejandrojb.github.io/notiticas-api/noticias/noticias.json";
+    const urlAPI = "https://jalejandrojb.github.io/notiticas-api/noticias.json";
 
     fetch(urlAPI)
       .then((response) => response.json())
