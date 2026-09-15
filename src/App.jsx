@@ -6,18 +6,28 @@ function App() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const urlAPI = "https://jalejandrojb.github.io/notiticas-api/noticias.json";
+  const urlAPI = "https://jalejandrojb.github.io/notiticas-api/noticias.json";
 
-    fetch(urlAPI)
-      .then((response) => response.json())
-      .then((data) => {
-        setNoticias(data);
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.error("Error al obtener las noticias:", error);
-        setLoading(false);
-      });
+  fetch(urlAPI, {
+    method: "GET",
+    headers: {
+      "Accept": "application/json"
+    }
+  })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(`Error HTTP: ${response.status} ${response.statusText}`);
+      }
+      return response.json();
+    })
+    .then((data) => {
+      setNoticias(data);
+      setLoading(false);
+    })
+    .catch((error) => {
+      console.error("Error detallado al obtener las noticias:", error);
+      setLoading(false);
+    });
   }, []);
 
   if (loading) {
